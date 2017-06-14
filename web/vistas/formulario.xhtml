@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/template.xhtml">
+
+    <ui:define name="title">#{msg['label.titulo']}</ui:define>
+
+    <ui:define name="viewname">#{msg['label.vista.formulario']}</ui:define>
+     
+    <ui:define name="content">
+        <p:separator/>
+        <h:form id="frmFormulario">
+            <p:growl id="growl" showDetail="true" sticky="true" showSummary="false" class="mensaje" />  
+            <div class="ui-fluid">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <div class="card card-w-title">
+                            <ui:include src="./../secciones/proceso.xhtml"/>
+                            <!--Panel de datos inciales de registro -->
+                            <ui:include src="./../secciones/inicio.xhtml" />
+                            <!--Panel de programa -->
+                            <ui:include src="./../secciones/programa.xhtml" />
+                            <!--Panel de informacion personal -->
+                            <ui:include src="./../secciones/datospersonales.xhtml" />
+                            <!--Panel informacion de contacto-->
+                            <ui:include src="./../secciones/informacioncontacto.xhtml" />
+                            <!--Panel informacion academica-->
+                            <ui:include src="./../secciones/informacionacademica.xhtml" />
+                            <!--Panel informacion academica-->
+                            <ui:include src="./../secciones/examenestado.xhtml" />
+                            <!--Panel informacion acudiente-->
+                            <ui:include src="./../secciones/informacionacudientes.xhtml" />
+                            <!--Panel informacion adicional-->
+                            <ui:include src="./../secciones/informacionadicional.xhtml" />                            
+                            <!--Documentos-->
+                            <ui:include src="./../secciones/entregaDocumentos.xhtml" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui-g-12 button-container">
+                <ui:include src="./../secciones/botoneformulario.xhtml" />
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

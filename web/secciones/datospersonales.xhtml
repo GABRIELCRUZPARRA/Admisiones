@@ -1,0 +1,120 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <p:panelGrid rendered="#{formularioMB.panelInfromacionPersonal}">
+        <div class="notas">
+            <p><em><strong>1.2 Información de Personal. </strong>Esta sección le permite registrar su información personal.</em> </p>
+        </div>
+   </p:panelGrid>
+
+    <p:panelGrid id="plGridInfromacionPerosnal" rendered="#{formularioMB.panelInfromacionPersonal}" columns="3" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank form-group" style="width: 100" >
+
+        <p:outputLabel for="somTipoIdentificacionInfPersonal" value="#{msg['label.tipoidentificacion']}"/>
+        <p:selectOneMenu   id="somTipoIdentificacionInfPersonal" disabled="true"  value="#{formularioMB.formulario.aspirante.tipoIdentificacion.codigoTipoIdentificacion}" required="true">
+            <f:selectItem itemLabel="Seleccione" itemValue="" />
+            <f:selectItems value="#{formularioMB.tiposIdentificaciones}" var="t" itemValue="#{t.codigoTipoIdentificacion}" itemLabel="#{t.nombreTipoIdentificacion}" />                        
+        </p:selectOneMenu>
+        <p:tooltip style="font-size: 12px" for="somTipoIdentificacionInfPersonal">#{msg['label.tipoidentificacion.tooltip']}</p:tooltip>
+
+        <p:outputLabel for="itxIdentificacionInfPersonal" value="#{msg['label.identificacion']}"/>
+        <p:inputText id="itxIdentificacionInfPersonal" value="#{formularioMB.formulario.aspirante.identificacion}" required="true" disabled="true" />
+        <p:tooltip style="font-size: 12px" for="itxIdentificacionInfPersonal">#{msg['label.identificacion.tooltip']}</p:tooltip>
+
+        <p:outputLabel for="atcCiudadExpedicionDocumento" value="#{msg['label.ciudadexpedicion']}" />
+        <p:autoComplete id="atcCiudadExpedicionDocumento" required="true"
+                        value="#{formularioMB.formulario.aspirante.ciudadExpedicionDocumento}"
+                        completeMethod="#{formularioMB.onCompletarCiudad}" var="c"
+                        itemLabel="#{c.nombreCiudad}" itemValue="#{c}"
+                        converter="ciudadConverter" forceSelection="true"
+                        disabled="#{formularioMB.editarDatosPersonales}"
+                        >
+        </p:autoComplete>
+        <p:tooltip style="font-size: 12px" for="atcCiudadExpedicionDocumento">#{msg['tooltip.ciudadexpedicion']}</p:tooltip>
+
+        <p:outputLabel for="cldFechaExpedicionDocumento" value="#{msg['label.fechaexpediciondocumento']}" />
+        <p:calendar id="cldFechaExpedicionDocumento" showOn="button" pattern="dd/MM/yyyy" value="#{formularioMB.formulario.aspirante.fechaExpedicionDocumento}" required="true" disabled="#{formularioMB.editarDatosPersonales}"/>
+        <p:tooltip style="font-size: 12px" for="cldFechaExpedicionDocumento">#{msg['tooltip.fechaexpediciondocumento']}</p:tooltip>
+
+
+        <p:outputLabel for="itxNacionalida" value="#{msg['label.nacionalidad']}"/>
+        <p:inputText id="itxNacionalida" value="#{formularioMB.formulario.aspirante.nacionalidad}" required="true" disabled="#{formularioMB.editarDatosPersonales}" onkeyup="this.value = this.value.toUpperCase();" />
+        <p:tooltip style="font-size: 12px" for="itxNacionalida">#{msg['tooltip.nacionalidad']}</p:tooltip>
+
+        <p:outputLabel for="itxNombres" value="#{msg['label.nombres']}"/>
+        <p:inputText id="itxNombres" value="#{formularioMB.formulario.aspirante.nombres}" required="true" disabled="#{formularioMB.editarDatosPersonales}"  onkeyup="this.value = this.value.toUpperCase();"/>
+        <p:tooltip style="font-size: 12px" for="itxNombres">#{msg['tooltip.nombres']}</p:tooltip>
+
+        <p:outputLabel for="itxApellidos" value="#{msg['label.apellidos']}"/>
+        <p:inputText id="itxApellidos" value="#{formularioMB.formulario.aspirante.apellidos}" required="true" disabled="#{formularioMB.editarDatosPersonales}" onkeyup="this.value = this.value.toUpperCase();"/>
+        <p:tooltip style="font-size: 12px" for="itxApellidos">#{msg['tooltip.apellidos']}</p:tooltip>
+
+        <p:outputLabel for="cldFechaNacimientoInfPersonal" value="#{msg['label.fechanacimiento']}"  />
+        <p:calendar id="cldFechaNacimientoInfPersonal" readonly="true" showOn="button" pattern="dd/MM/yyyy" value="#{formularioMB.formulario.aspirante.fechaNacimiento}" required="true" disabled="#{formularioMB.editarDatosPersonales}" />
+        <p:tooltip style="font-size: 12px" for="cldFechaNacimientoInfPersonal">#{msg['label.fechanacimiento.tooltip']}</p:tooltip>
+
+        <p:outputLabel for="atcCiudadNacimiento" value="#{msg['label.ciudadnacimiento']}" />
+        <p:autoComplete id="atcCiudadNacimiento"
+                        queryDelay="1000" value="#{formularioMB.formulario.aspirante.ciudadNacimiento}"
+                        completeMethod="#{formularioMB.onCompletarCiudad}" var="cn"
+                        itemLabel="#{cn.nombreCiudad}" itemValue="#{cn}"
+                        converter="ciudadConverter"
+                        required="true"
+                        disabled="#{formularioMB.editarDatosPersonales}">
+        </p:autoComplete>
+        <p:tooltip style="font-size: 12px" for="atcCiudadNacimiento">#{msg['tooltip.ciudadnacimiento']}</p:tooltip>
+        
+        <p:outputLabel for="somGenero" value="#{msg['label.genero']}"/>
+        <p:selectOneMenu   id="somGenero"  value="#{formularioMB.formulario.aspirante.genero}" required="true" disabled="#{formularioMB.editarDatosPersonales}">
+            <f:selectItem itemLabel="Seleccione" itemValue="" />
+            <f:selectItem itemLabel="Femenino" itemValue="F" />
+            <f:selectItem itemLabel="Masculino" itemValue="M" />
+        </p:selectOneMenu>
+        <p:tooltip style="font-size: 12px" for="somGenero">#{msg['tooltip.genero']}</p:tooltip>
+
+        <p:outputLabel for="somEstadoCivil" value="#{msg['label.estadocivil']}"/>
+        <p:selectOneMenu   id="somEstadoCivil"  value="#{formularioMB.formulario.aspirante.estadoCivil.codigoEstado}" required="true" disabled="#{formularioMB.editarDatosPersonales}">
+            <f:selectItem itemLabel="Seleccione" itemValue="" />
+            <f:selectItems value="#{formularioMB.estadosCivil}" var="ec" itemValue="#{ec.codigoEstado}" itemLabel="#{ec.nombreEstado}" />                        
+        </p:selectOneMenu>
+        <p:tooltip style="font-size: 12px" for="somEstadoCivil">#{msg['tooltip.estadocivil']}</p:tooltip>
+
+        <p:outputLabel for="somCondicionEspecial" value="#{msg['label.condicionespecial']}"/>
+        <p:selectOneMenu   id="somCondicionEspecial"  value="#{formularioMB.formulario.aspirante.condicionEspecial.codigoCondicion}" disabled="#{formularioMB.editarDatosPersonales}">
+            <f:selectItem itemLabel="Seleccione" itemValue="" />
+            <f:selectItems value="#{formularioMB.condicionesEspeciales}" var="ce" itemValue="#{ce.codigoCondicion}" itemLabel="#{ce.nombreCondicion}" />    
+            <p:ajax listener="#{formularioMB.mostrarOtraCondicionEspecial}" process="@this" update="contenedorOtlOtraCondicionEspecial,contenedorItxtOtraCondicionEspecial,contenedorTipOtraCondicionEspecial"/>
+        </p:selectOneMenu>
+        <p:tooltip style="font-size: 12px" for="somCondicionEspecial">#{msg['tooltip.condicionespecial']}</p:tooltip>
+
+        <h:panelGroup id="contenedorOtlOtraCondicionEspecial">
+            <p:outputLabel id="otlOtraCondicionEspecial" rendered="#{formularioMB.otraCondicionEspecial}" for="itxtOtraCondicionEspecial" value="#{msg['label.otracondicionespecial']}"/>
+        </h:panelGroup>
+        <h:panelGroup id="contenedorItxtOtraCondicionEspecial">
+            <p:inputText id="itxtOtraCondicionEspecial" value="#{formularioMB.formulario.aspirante.otraCondicionEspecial}" rendered="#{formularioMB.otraCondicionEspecial}" required="#{formularioMB.otraCondicionEspecial}" disabled="#{formularioMB.editarDatosPersonales}" onkeyup="this.value = this.value.toUpperCase();" />
+        </h:panelGroup> 
+        <h:panelGroup id="contenedorTipOtraCondicionEspecial"></h:panelGroup>
+        
+   
+        <p:outputLabel for="somGrupoEtnico" value="#{msg['label.grupoetnico']}"/>
+        <p:selectOneMenu   id="somGrupoEtnico"  value="#{formularioMB.formulario.aspirante.grupoEtnico.codigoGrupoEtnico}" disabled="#{formularioMB.editarDatosPersonales}">
+            <f:selectItem itemLabel="Seleccione" itemValue="" />
+            <f:selectItems value="#{formularioMB.gruposEtnicos}" var="get" itemValue="#{get.codigoGrupoEtnico}" itemLabel="#{get.nombreGrupoEtnico}" />    
+            <p:ajax listener="#{formularioMB.mostrarOtroGrupoEtnico}" process="@this" update="contenedorLbOtroOtGrupoEtnico,contenedorItxtGrupoEtnico,contenedorTipOtroGrupoEtnico"/>
+        </p:selectOneMenu>
+        <p:tooltip style="font-size: 12px" for="somGrupoEtnico">#{msg['tooltip.grupoetnico']}</p:tooltip>
+
+        <h:panelGroup id="contenedorLbOtroOtGrupoEtnico">
+            <p:outputLabel rendered="#{formularioMB.otroGrupoEtnico}" for="itxtOtroGrupoEtnico" value="#{msg['label.otrogrupoetnico']}"/>
+        </h:panelGroup>
+        <h:panelGroup id="contenedorItxtGrupoEtnico">
+            <p:inputText id="itxtOtroGrupoEtnico" value="#{formularioMB.formulario.aspirante.otroGrupoEtnico}" rendered="#{formularioMB.otroGrupoEtnico}" required="#{formularioMB.otroGrupoEtnico}" disabled="#{formularioMB.editarDatosPersonales}" onkeyup="this.value = this.value.toUpperCase();"/>
+        </h:panelGroup>   
+        <h:panelGroup id="contenedorTipOtroGrupoEtnico"></h:panelGroup>
+
+    </p:panelGrid>
+
+</ui:composition>

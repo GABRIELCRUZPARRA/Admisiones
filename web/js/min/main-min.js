@@ -1,0 +1,1 @@
+$(document).ready(function(){$("#fullpage").fullpage({menu:"#menu",lockAnchors:!0,anchors:["konrad","formulario","soporte"],navigation:!0,navigationPosition:"right",navigationTooltips:["Bienvenidos","Formulario","Soporte"],showActiveTooltip:!1,slidesNavigation:!0,slidesNavPosition:"bottom"})});

@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+    "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="Admisiones">
+    
+    <resultMap id="resTipoIdentificacion" type="aliasTipoIdentificacion">
+        <result property="codigoTipoIdentificacion"        column="idtipo"/>
+        <result property="nombreTipoIdentificacion"	   column="nomtipo"/>
+    </resultMap>
+    
+    <resultMap id="resTiposPrograma" type="aliasTipoPrograma">
+        <result property="codigoTipoPrograma"      column="cdidtipoprograma"/>
+        <result property="nombreTipoPrograma"	   column="dsnombretipo"/>
+    </resultMap>
+    
+    <resultMap id="resPrograma" type="aliasPrograma">        
+        <result property="idPrograma" column="id_prog"/>
+        <result property="idFacultad" column="id_fac"/>
+        <result property="codigoPrograma" column="cod_prog"/>
+        <result property="nombrePrograma" column="nom_prog"/>
+        <result property="descripcion" column="cdidtipoprograma"/>
+        <result property="tipoPrograma.codigoTipoPrograma" column="tip_prog"/>
+        <result property="tipoPrograma.nombreTipoPrograma" column="dsnombretipo"/>
+    </resultMap>
+    
+    <resultMap id="resJornada" type="aliasJornada">
+        <result property="codigoJornada"      column="id_jornada"/>
+        <result property="nombreJornada"      column="descjornada"/>
+    </resultMap>
+    
+    <resultMap id="resTipoSolictud" type="aliasTipoSolicitud">
+        <result property="codigoTipoSolicitud"      column="cdidtiposolicitud"/>
+        <result property="nombreTipoSolictud"      column="dsnombretipo"/>
+    </resultMap>
+    
+    <resultMap id="resCiudad" type="aliasCiudad">
+        <result property="idCiudad"      column="id_ciu"/>
+        <result property="cdPais"        column="cd_pais"/>
+        <result property="cdPais"        column="cd_dpto"/>
+        <result property="cdPoblacion"   column="cd_poblacion"/>
+        <result property="cdCiudad"      column="cd_ciudad"/>
+        <result property="nombreCiudad"  column="nom_ciudad"/>
+    </resultMap>
+    
+    <resultMap id="resEstadoCivil" type="aliasEstadoCivil">
+        <result property="codigoEstado"      column="estciv"/>
+        <result property="nombreEstado"      column="dsnomestado"/>
+    </resultMap>
+    
+    <resultMap id="resColegio" type="aliasColegio">
+        <result property="idColegio"      column="id_col"/>
+        <result property="nombreColegio"      column="nom_col"/>
+        <result property="calendario"      column="cal_col"/>
+    </resultMap>
+    
+    <resultMap id="resFuenteInformacion" type="aliasFuenteInformacion">
+        <result property="codigoFuenteInformacion"      column="nmidtipomedio"/>
+        <result property="nombreFuenteInformacion"      column="dsnombremedio"/>
+    </resultMap>
+    
+    <resultMap id="resGrupoEtnico" type="aliasGrupoEtnico">
+        <result property="codigoGrupoEtnico"      column="nmidgrupocom"/>
+        <result property="nombreGrupoEtnico"      column="dsgrupocomunidad"/>
+    </resultMap>
+    
+    <resultMap id="resLocalidad" type="aliasLocalidad">
+        <result property="codigoLocalidad"      column="nmidlocalidad"/>
+        <result property="nombreLocalidad"      column="dsnombrelocalidad"/>
+    </resultMap>
+    
+    <resultMap id="resEstrato" type="aliasEstrato">
+        <result property="codigoEstrato"      column="estrato"/>
+        <result property="nombreEstrato"      column="dsnomestado"/>
+    </resultMap>
+    
+    <resultMap id="resTipoBachiller" type="aliasTipoBachiller">
+        <result property="codigoTipoBachiller"     column="titbach"/>
+        <result property="nombreTipoBachille"      column="dsnomestado"/>
+    </resultMap>
+    
+    <resultMap id="resParentesco" type="aliasParentesco">
+        <result property="codigoParentesco"     column="tip_res"/>
+        <result property="nombreParentesco"     column="dsnomestado"/>
+    </resultMap>
+    
+    <resultMap id="resFuenteFinanciacion" type="aliasFuenteFinanciacion">
+        <result property="codigoFuenteFinanciacion"     column="pagmax"/>
+        <result property="nombreFuenteFinanciacion"     column="dsnomestado"/>
+    </resultMap>
+    
+    <select id="obtenerListadoFuenteFiananciacion" resultMap="resFuenteFinanciacion">         
+        select pagmax,dsnomestado
+          from registro.tref_fuente_financiacion
+    </select>    
+    
+    <select id="obtenerListadoResponsable" resultMap="resParentesco">         
+        select tip_res,dsnomestado
+        from registro.tref_tipo_responsable
+    </select>    
+    
+    <select id="obtenerListadoTipoBachiller" resultMap="resTipoBachiller" >         
+        select titbach,dsnomestado
+        from registro.tref_tipo_ballicher
+    </select>    
+    
+    <select id="obtenerListadoEstrato" resultMap="resEstrato" > 
+        select estrato, dsnomestado
+        from registro.tref_estrato
+        order by 1
+    </select>
+    
+    <select id="obtenerListadoLocalidad" resultMap="resLocalidad" parameterType="String"> 
+        select nmidlocalidad,dsnombrelocalidad
+        from registro.tref_localidadesbog
+        where nmidlocalidad!=0 and id_ciu=#{parametro, mode=IN,jdbcType=NUMERIC}
+    </select>
+    
+    <select id="obtenerListadoGrupoEtnico" resultMap="resGrupoEtnico"> 
+        select nmidgrupocom,dsgrupocomunidad
+        from registro.tref_grupocomunidad
+        where snvigente='S' and nmidgrupocom!='0'
+        order by 2
+    </select>
+        
+    <select id="obtenerListadoFuenteInformacion" resultMap="resFuenteInformacion"> 
+        select nmidtipomedio,dsnombremedio
+        from registro.tref_tipo_medio
+        where nmidtipomedio!=0
+        order by 2
+    </select>
+           
+    <select id="obtenerListadoTipoIdentificacion" resultMap="resTipoIdentificacion"> 
+        select idtipo,nomtipo
+        from registro.tipodocid
+    </select>
+        
+    <select id="obtenerPeriodo" resultType="String"> 
+        select per_ing 
+        from registro.Periodo_Admisiones
+    </select>
+    
+    <select id="obtenerListadoTipoProgramas" resultMap="resTiposPrograma"> 
+        select cdidtipoprograma,
+        dsnombretipo
+        from registro.tref_tipo_programa
+        where  cdidtipoprograma in('E','P')
+    </select>
+    
+    <select id="obtenerListadoProgramas" parameterType="String" resultMap="resPrograma"> 
+        SELECT a.id_prog,
+        a.id_fac,
+        a.cod_prog,
+        a.nom_prog,
+        a.tip_prog,
+        b.dsnombretipo
+        FROM registro.programas a,
+        registro.tref_tipo_programa b
+        WHERE a.tip_prog=#{parametro,mode=IN,jdbcType=VARCHAR} and a.activo='S' and 
+        a.tip_prog=b.cdidtipoprograma 
+        ORDER BY 4
+    </select>
+    
+    <select id="obtenerListadoJornada" resultMap="resJornada"> 
+        select id_jornada,descjornada
+        from registro. jornada
+    </select>
+    
+    <select id="obtenerListadoTipoSolicitud" resultMap="resTipoSolictud"> 
+        select cdidtiposolicitud,dsnombretipo
+        from registro.tref_tipo_solicitud
+    </select>
+    
+    <select id="obtenerListadoCiudades" resultMap="resCiudad"> 
+        select id_ciu,cd_pais,cd_dpto,cd_poblacion,cd_ciudad,nom_ciudad
+        from registro.ciudad
+        where id_ciu!=0
+    </select>
+    
+    <select id="obtenerCiudadPorId" resultType ="aliasCiudad" parameterType="String" > 
+        select id_ciu as idCiudad,cd_pais as cdPais,cd_dpto as cdDpto,cd_poblacion as cdPoblacion,cd_ciudad as cdCiudad,nom_ciudad as nombreCiudad
+        from registro.ciudad
+        where id_ciu!=0 and CONVERT(varchar,id_ciu)=#{parametro,mode=IN,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="obtenerListadoEstadoCivil" resultMap="resEstadoCivil"> 
+        select estciv,dsnomestado 
+        from registro.tref_estado_civil
+    </select>
+    
+    <select id="obtenerListadoColegios" resultMap="resColegio"> 
+        select id_col, nom_col,cal_col 
+        from registro.colegios
+    </select>
+    
+    <select id="obtenerColegioPorId" resultType ="aliasColegio" parameterType="String"> 
+        select id_col as idColegio, nom_col as nombreColegio,cal_col as calendario 
+        from registro.colegios
+        where CONVERT(varchar,id_col)=#{parametro,mode=IN,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="obtenerSecuenciaEscolaris" parameterType="String" resultType="String"> 
+        select sig_sec
+        from registro.secuencias
+        where nombre =#{parametro,mode=IN,jdbcType=VARCHAR}
+    </select>
+    
+    <update id="actualizarSecuenciaEscolaris" parameterType="String">
+        UPDATE registro.secuencias 
+        SET sig_sec = sig_sec+incr 
+        WHERE nombre = #{parametro,mode=IN,jdbcType=VARCHAR}
+    </update>
+    
+    
+    <insert id="insertarEstudiante" parameterType="aliasFormulario" > 
+        INSERT into registro.estudiante (id_est, 
+        per_ing,
+        nro_carn,
+        nom_est,
+        ape_est,
+        fec_insc,
+        idprg,
+        tpprg, 
+        sexo, 
+        docest,
+        tipdoc,
+        lugexp,
+        feexpedicion,
+        estciv,
+        nro_snp,
+        fec_nac,
+        lug_nac,
+        dsnacionalidad,
+        dir_corr,
+        tel_corr,
+        ciu_corr,
+        cel_est,
+        estado,
+        fec_icfes,
+        email,
+        eotro,
+        jornada,
+        barrio,
+        estrato,
+        nmidlocalidad,
+        nmidcampana,
+        pyz,
+        tipsol) 
+        values (#{aspirante.idEstudiante,mode=IN,jdbcType=NUMERIC},
+        #{periodo,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.nroCarn,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.nombres,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.apellidos,mode=IN,jdbcType=VARCHAR},
+        GETDATE(),
+        #{programa.idPrograma,mode=IN,jdbcType=VARCHAR},
+        #{programa.tipoPrograma.codigoTipoPrograma,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.genero,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.identificacion,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.tipoIdentificacion.codigoTipoIdentificacion,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.ciudadExpedicionDocumento.idCiudad,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.fechaExpedicionDocumento,mode=IN,jdbcType=DATE},
+        #{aspirante.estadoCivil.codigoEstado,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.examenEstado.snp,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.fechaNacimiento,mode=IN,jdbcType=DATE},
+        #{aspirante.ciudadNacimiento.idCiudad,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.nacionalidad,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.informacionContacto.direccion,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.informacionContacto.telefono,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.informacionContacto.ciudad.idCiudad,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.informacionContacto.celular,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.estado,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.examenEstado.fechaPresentacion,mode=IN,jdbcType=DATE},
+        #{aspirante.informacionContacto.email,mode=IN,jdbcType=VARCHAR}, 
+        #{aspirante.informacionContacto.email,mode=IN,jdbcType=VARCHAR}, 
+        #{jornada.codigoJornada,mode=IN,jdbcType=VARCHAR}, 
+        #{aspirante.informacionContacto.barrio,mode=IN,jdbcType=VARCHAR}, 
+        #{aspirante.informacionContacto.estrato.codigoEstrato,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.informacionContacto.localidad.codigoLocalidad,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.informacionAdicional.fuenteInformacion.codigoFuenteInformacion,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.pyz,mode=IN,jdbcType=VARCHAR},
+        #{tipoSolictud.codigoTipoSolicitud,mode=IN,jdbcType=VARCHAR}
+        )
+    </insert>
+    
+    <insert id="insertarInformacionIcfes" parameterType="aliasFormulario" > 
+        insert into registro.punt_icfes (id_pic,nro_snp,id_est,ficf) 
+        values (#{aspirante.examenEstado.idExamen,mode=IN,jdbcType=NUMERIC},
+        #{aspirante.examenEstado.snp,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.idEstudiante,mode=IN,jdbcType=NUMERIC},
+        #{aspirante.examenEstado.fechaPresentacion,mode=IN,jdbcType=DATE}
+        )
+    </insert>
+    
+    <insert id="insertarFuenteInformacion" parameterType="aliasFormulario" >
+        insert into registro.infpromocion (id_inf,id_est,nmidtipomedio,cuotr) 
+        values (#{aspirante.informacionAdicional.fuenteInformacion.idFuenteInformacion,mode=IN,jdbcType=NUMERIC},
+        #{aspirante.idEstudiante,mode=IN,jdbcType=NUMERIC},
+        #{aspirante.informacionAdicional.fuenteInformacion.codigoFuenteInformacion,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.informacionAdicional.otraFuente,mode=IN,jdbcType=VARCHAR})        
+    </insert>
+    
+    <insert id="insertarInformacionResponsable" parameterType="aliasFormulario" > 
+        insert into registro.responsable(id_res,id_est,tip_res,nom_res,ape_res,vive_res,tel_res,email,dscelular) 
+        values(#{aspirante.informacionAcudiente.idAcudiente,mode=IN,jdbcType=NUMERIC},
+        #{aspirante.idEstudiante,mode=IN,jdbcType=NUMERIC},
+        #{aspirante.informacionAcudiente.parentesco.codigoParentesco ,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.informacionAcudiente.nombres,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.informacionAcudiente.apellidos,mode=IN,jdbcType=VARCHAR},
+        'S',
+        #{aspirante.informacionAcudiente.telefono,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.informacionAcudiente.email,mode=IN,jdbcType=VARCHAR},
+        #{aspirante.informacionAcudiente.celular,mode=IN,jdbcType=VARCHAR}
+        )        
+    </insert>
+    
+    
+    <update id="updateEstudianteDatosAcademicos" parameterType="aliasFormulario" > 
+        update registro.estudiante 
+        set id_col=#{aspirante.informacionAcademica.colegio.idColegio,mode=IN,jdbcType=VARCHAR},
+        titbach=#{aspirante.informacionAcademica.tipoBachiller.codigoTipoBachiller,mode=IN,jdbcType=VARCHAR},
+        ciudcol=#{aspirante.informacionAcademica.ciudadColegio.idCiudad,mode=IN,jdbcType=VARCHAR},
+        tipcol=#{aspirante.informacionAcademica.tipoColegio.codigoTipoColegio,mode=IN,jdbcType=VARCHAR},
+        calcol=#{aspirante.informacionAcademica.calendario.codigoCalendario,mode=IN,jdbcType=VARCHAR},
+        aniogr=#{aspirante.informacionAcademica.anyoGraduacion,mode=IN,jdbcType=VARCHAR} 
+        where id_est=#{aspirante.idEstudiante,mode=IN,jdbcType=NUMERIC}
+    </update>    
+    
+    <update id="updateEstudianteDatosExamen" parameterType="aliasFormulario" > 
+        update registro.estudiante 
+        set nro_snp=#{aspirante.examenEstado.snp,mode=IN,jdbcType=VARCHAR}
+        where id_est=#{aspirante.idEstudiante,mode=IN,jdbcType=NUMERIC}
+    </update>  
+    
+    
+    <update id="updateEstudianteFuenteFinanciacion" parameterType="aliasFormulario" > 
+        update registro.estudiante 
+        set pagmax=#{aspirante.informacionAdicional.fuenteFinanciacion.codigoFuenteFinanciacion,mode=IN,jdbcType=VARCHAR}
+        where id_est=#{aspirante.idEstudiante,mode=IN,jdbcType=NUMERIC}
+    </update>  
+    
+    <resultMap id="resEstudiante" type="aliasFormulario">
+        <result property="aspirante.idEstudiante"                                                       column="id_est"/>
+        <result property="periodo"                                                                      column="per_ing"/>
+        <result property="aspirante.nroCarn"                                                            column="nro_carn"/>
+        <result property="aspirante.nombres"                                                            column="nom_est"/>
+        <result property="aspirante.apellidos"                                                          column="ape_est"/>
+        <result property="programa.idPrograma"                                                          column="idprg"/>
+        <result property="programa.idPrograma"                                                          column="idprg"/>
+        <result property="programa.tipoPrograma.codigoTipoPrograma"                                     column="tpprg"/>
+        <result property="aspirante.genero"                                                             column="sexo"/>
+        <result property="aspirante.identificacion"                                                     column="docest"/>
+        <result property="aspirante.tipoIdentificacion.codigoTipoIdentificacion"                        column="tipdoc"/>
+        <result property="aspirante.ciudadExpedicionDocumento.idCiudad"                                 column="lugexp"/>
+        <result property="aspirante.fechaExpedicionDocumento"                                           column="feexpedicion"/>
+        <result property="aspirante.estadoCivil.codigoEstado"                                           column="estciv"/>
+        <result property="aspirante.examenEstado.snp"                                                   column="nro_snp"/>
+        <result property="aspirante.fechaNacimiento"                                                    column="fec_nac"/>
+        <result property="aspirante.ciudadNacimiento.idCiudad"                                          column="lug_nac"/>
+        <result property="aspirante.nacionalidad"                                                       column="dsnacionalidad"/>
+        <result property="aspirante.informacionContacto.direccion"                                      column="dir_corr"/>
+        <result property="aspirante.informacionContacto.telefono"                                       column="tel_corr"/>
+        <result property="aspirante.informacionContacto.ciudad.idCiudad"                                column="ciu_corr"/>
+        <result property="aspirante.informacionContacto.celular"                                        column="cel_est"/>
+        <result property="aspirante.estado"                                                             column="estado"/>
+        <result property="aspirante.examenEstado.fechaPresentacion"                                     column="fec_icfes"/>
+        <result property="aspirante.informacionContacto.email"                                          column="email"/>
+        <result property="aspirante.informacionContacto.confirmarEmail"                                 column="eotro"/>
+        <result property="jornada.codigoJornada"                                                        column="jornada"/>
+        <result property="aspirante.informacionContacto.barrio"                                         column="barrio"/>
+        <result property="aspirante.informacionContacto.estrato.codigoEstrato"                          column="estrato"/>
+        <result property="aspirante.informacionContacto.localidad.codigoLocalidad"                      column="nmidlocalidad"/>
+        <result property="aspirante.informacionAdicional.fuenteInformacion.codigoFuenteInformacion"     column="nmidcampana"/>
+        <result property="aspirante.ciudadExpedicionDocumento.nombreCiudad"                             column="nombreciuexpedicion"/>
+        <result property="aspirante.ciudadNacimiento.nombreCiudad"                                      column="nombreciunacimiento"/>
+        <result property="aspirante.informacionContacto.ciudad.nombreCiudad"                            column="nombreciudireccion"/>
+        <result property="tipoSolictud.codigoTipoSolicitud"                                             column="tipsol"/>
+        <result property="aspirante.informacionAcademica.colegio.idColegio"                             column="id_col"/>
+        <result property="aspirante.informacionAcademica.colegio.nombreColegio"                         column="nom_col"/>
+        <result property="aspirante.informacionAcademica.tipoBachiller.codigoTipoBachiller"             column="titbach"/>
+        <result property="aspirante.informacionAcademica.ciudadColegio.idCiudad"                        column="ciudcol"/>
+        <result property="aspirante.informacionAcademica.ciudadColegio.nombreCiudad"                    column="nombreciucolegio"/>
+        <result property="aspirante.informacionAcademica.tipoColegio.codigoTipoColegio"                 column="tipcol"/>
+        <result property="aspirante.informacionAcademica.calendario.codigoCalendario"                   column="calcol"/>
+        <result property="aspirante.informacionAcademica.anyoGraduacion"                                column="aniogr"/>
+        <result property="aspirante.informacionAcademica.graduadoColombia"                              column="graduadocolombia"/>
+        <result property="aspirante.examenEstado.snp"                                                   column="nro_snp"/>
+        <result property="aspirante.examenEstado.fechaPresentacion"                                     column="ficf"/>        
+        
+        <result property="aspirante.informacionAcudiente.parentesco.codigoParentesco"                   column="tip_res"/>        
+        <result property="aspirante.informacionAcudiente.nombres"                                       column="nom_res"/>        
+        <result property="aspirante.informacionAcudiente.apellidos"                                     column="ape_res"/>        
+        <result property="aspirante.informacionAcudiente.telefono"                                      column="tel_res"/>        
+        <result property="aspirante.informacionAcudiente.email"                                         column="emailacudiente"/>        
+        <result property="aspirante.informacionAcudiente.celular"                                       column="dscelular"/>        
+        
+        <result property="aspirante.informacionAdicional.fuenteFinanciacion.codigoFuenteFinanciacion"   column="pagmax"/>        
+        <result property="aspirante.informacionAdicional.fuenteInformacion.codigoFuenteInformacion"     column="nmidtipomedio"/>        
+        <result property="aspirante.informacionAdicional.otraFuente"                                    column="cuotr"/>        
+        
+    </resultMap>
+    
+    <select id="obtenerEtudiante" resultMap="resEstudiante" parameterType="aliasFormulario"> 
+        select a.id_est,a.per_ing,a.nro_carn,a.nom_est,a.ape_est,a.idprg,a.tpprg,a.sexo,a.docest,a.tipdoc,
+        a.lugexp,a.feexpedicion,a.estciv,a.fec_nac,a.lug_nac,a.dsnacionalidad,a.dir_corr,
+        a.tel_corr,a.ciu_corr, a.cel_est, a.estado, a.fec_icfes,a.email,a.eotro,a.jornada,barrio,
+        a.estrato, a.nmidlocalidad,a.nmidcampana, b.nom_ciudad as nombreciuexpedicion, c.nom_ciudad as nombreciunacimiento,
+        c.nom_ciudad as nombreciudireccion, 
+        tipsol, 
+        a.id_col,
+        e.nom_col,
+        a.titbach,
+        a.ciudcol,
+        f.nom_ciudad as nombreciucolegio,
+        a.tipcol,
+        a.calcol,
+        a.aniogr,
+        'S' graduadocolombia,
+        g.nro_snp,
+        g.ficf,
+        h.tip_res,
+        h.nom_res,
+        h.ape_res,
+        h.tel_res,
+        h.email emailacudiente,
+        h.dscelular,
+        a.pagmax,
+        i.nmidtipomedio,
+        i.cuotr
+        from registro.estudiante a
+        inner join registro.ciudad b on  a.lugexp=b.id_ciu
+        inner join registro.ciudad c on  a.lug_nac=c.id_ciu
+        full outer join registro.ciudad d on  a.ciu_corr=d.id_ciu
+        full outer join registro.colegios e on a.id_col=e.id_col
+        full outer join registro.ciudad f on  a.ciudcol=f.id_ciu
+        full outer join registro.punt_icfes g on  a.id_est=g.id_est
+        full outer join registro.responsable h on  a.id_est=h.id_est
+        full outer join registro.infpromocion i on  a.id_est=i.id_est
+        where docest=#{aspirante.identificacion,mode=IN,jdbcType=VARCHAR}
+        and tipdoc=#{aspirante.tipoIdentificacion.codigoTipoIdentificacion,mode=IN,jdbcType=VARCHAR} 
+        and per_ing=#{periodo,mode=IN,jdbcType=VARCHAR}
+    </select>
+    
+</mapper>

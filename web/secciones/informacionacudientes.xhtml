@@ -1,0 +1,46 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <p:panelGrid rendered="#{formularioMB.panelInformacionAcudiente}">
+        <div class="notas">
+            <p><em><strong>1.6 Información de Responsable o Acudeintes.</strong>Esta sección le permite registrar la información  personal y de contacto de su responsable o acudiente.</em> </p>
+        </div>
+   </p:panelGrid>
+
+    <p:panelGrid rendered="#{formularioMB.panelInformacionAcudiente}" columns="3" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank form-group" style="width: 100%" >
+
+       <p:outputLabel for="somParentescoAcudiente" value="#{msg['label.parenteco']}"/>
+       <p:selectOneMenu   id="somParentescoAcudiente" value="#{formularioMB.formulario.aspirante.informacionAcudiente.parentesco.codigoParentesco}" required="true" disabled="#{formularioMB.editarDatosAcudiente}">
+            <f:selectItem itemLabel="Seleccione" itemValue="" />
+            <f:selectItems value="#{formularioMB.parentescos}" var="par" itemValue="#{par.codigoParentesco}" itemLabel="#{par.nombreParentesco}" />                        
+        </p:selectOneMenu>
+        <p:tooltip style="font-size: 12px" for="somParentescoAcudiente">#{msg['tooltip.codigosnp']}</p:tooltip>
+       
+        <p:outputLabel for="itxNombresAcudiente" value="#{msg['label.nombresacudiente']}"/>
+        <p:inputText id="itxNombresAcudiente" value="#{formularioMB.formulario.aspirante.informacionAcudiente.nombres}" required="true" disabled="#{formularioMB.editarDatosAcudiente}" onkeyup="this.value = this.value.toUpperCase();"/>
+        <p:tooltip style="font-size: 12px" for="itxNombresAcudiente">#{msg['tooltip.nombresacudiente']}</p:tooltip>
+        
+        <p:outputLabel for="itxApellidosAcudiente" value="#{msg['label.apellidosacudiente']}"/>
+        <p:inputText id="itxApellidosAcudiente" value="#{formularioMB.formulario.aspirante.informacionAcudiente.apellidos}" required="true" disabled="#{formularioMB.editarDatosAcudiente}" onkeyup="this.value = this.value.toUpperCase();" />
+        <p:tooltip style="font-size: 12px" for="itxApellidosAcudiente">#{msg['tooltip.apellidosacudiente']}</p:tooltip>
+        
+        <p:outputLabel for="imxTelefonoAcudiente" value="#{msg['label.telefonoacudiente']}"/>
+        <p:inputText id="imxTelefonoAcudiente" required="true" value="#{formularioMB.formulario.aspirante.informacionAcudiente.telefono}" disabled="#{formularioMB.editarDatosAcudiente}"/>
+        <p:tooltip style="font-size: 12px" for="imxTelefonoAcudiente">#{msg['tooltip.telefonoacudiente']}</p:tooltip>
+
+        <p:outputLabel for="imxCelularAcudiente" value="#{msg['label.celularacudiente']}"/>
+        <p:inputText id="imxCelularAcudiente" required="true" value="#{formularioMB.formulario.aspirante.informacionAcudiente.celular}" disabled="#{formularioMB.editarDatosAcudiente}"  />
+        <p:tooltip style="font-size: 12px" for="imxCelularAcudiente">#{msg['tooltip.celularacudiente']}</p:tooltip>
+
+        <p:outputLabel for="itxEmailAcudiente" value="#{msg['label.emailacudiente']}"/>
+        <p:inputText id="itxEmailAcudiente" value="#{formularioMB.formulario.aspirante.informacionAcudiente.email}"  validatorMessage="#{msg['message.validate.email']}" disabled="#{formularioMB.editarDatosAcudiente}" >
+            <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+        </p:inputText>
+        <p:tooltip style="font-size: 12px" for="itxEmailAcudiente">#{msg['tooltip.emailacudiente']}</p:tooltip>
+        
+    </p:panelGrid>
+
+</ui:composition>

@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      >
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>Formualario de Inscripcion - Cargue de Foto </title>
+        <h:outputScript name="js/nanoscroller.js" library="poseidon-layout" />
+        <h:outputScript name="js/layout.js" library="poseidon-layout" />
+        <h:outputScript name="js/swipe.js" library="poseidon-layout" />
+    </h:head>
+
+    <body styleClass="login-body">
+        <f:view>
+            <f:metadata>
+                <f:viewParam name="identificacion" value="#{fileUploadView.numeroIdenticacion}"></f:viewParam>
+                <f:viewParam name="periodo" value="#{fileUploadView.periodo}"></f:viewParam>
+            </f:metadata>
+        </f:view>
+        <div style="color: #666666;font-family: Arial,Helvetica,sans-serif;font-size: 13px;font-weight: bold;">
+            <p><strong>Por favor cargue una foto tipo documento con: </strong>Fondo blanco, 3X4 cms. de tamaño, en formato .jpeg y que no supere los 150 KB.</p>
+        </div>
+        <div class="login-panel ui-fluid">
+
+            <h:form>
+                <p:fileUpload fileUploadListener="#{fileUploadView.uploadFile}" 
+                              mode="advanced" 
+                              dragDropSupport="false"
+                              update="messages" 
+                              sizeLimit="200000" 
+                              fileLimit="1" 
+                              allowTypes="/(\.|\/)(jpe?g)$/"
+                              label="Seleccionar Foto"
+                              uploadLabel="Cargar Foto"
+                              cancelLabel="Cancelar"
+                              invalidFileMessage="Tipo de archivo no valido."
+                              invalidSizeMessage="El tamaño del archivo es superior a lo permitido."
+                              style="font-size:12px"
+                              />
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <p:selectOneMenu   id="tipoIdentificacion" value="#{fileUploadView.tipoIDentificacion.codigoTipoIdentificacion}" requiredMessage="#{msg['label.tipoidentificacion.validate']}">
+                            <f:selectItem itemLabel="Seleccione" itemValue="" />
+                            <f:selectItems value="#{fileUploadView.tiposIdentificaciones}" var="t" itemValue="#{t.codigoTipoIdentificacion}" itemLabel="#{t.nombreTipoIdentificacion}" />                        
+                        </p:selectOneMenu>
+                        <p:tooltip for="tipoIdentificacion">Ingrese su tipo de DOCUMENTO</p:tooltip>
+                    </div>
+                </div>        
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" style="font-size:12px"/>
+
+                <p:lifecycle/>       
+                
+                <p:messages showDetail="true"/>
+                <p:captcha label="Captcha" />
+                <p:commandButton value="Check"  ajax="false" icon="ui-icon-check"/>                
+
+            </h:form>
+
+        </div>
+        <h:outputStylesheet name="css/nanoscroller.css" library="poseidon-layout" />
+        <h:outputStylesheet name="css/animate.css" library="poseidon-layout" />
+        <h:outputStylesheet name="css/layout-green.css" library="poseidon-layout" />
+        
+    </body>
+</html>
+

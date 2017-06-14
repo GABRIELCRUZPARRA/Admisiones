@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration   PUBLIC "-//ibatis.apache.org//DTD Config 3.0//EN"
+  						"http://ibatis.apache.org/dtd/ibatis-3-config.dtd">
+
+<configuration>
+    <!-- mapeamos el properties donde quedarán las configuraciones -->
+    <properties resource="datasource.properties"/>  
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <setting name="useColumnLabel" value="true"/>
+        <setting name="useGeneratedKeys" value="false"/>
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <setting name="defaultStatementTimeout" value="25000"/>
+    </settings>
+    <typeAliases>
+        <typeAlias alias="aliasTipoIdentificacion"   type="co.admisiones.bean.TipoIdentificacion"/>
+        <typeAlias alias="aliasJornada"   type="co.admisiones.bean.Jornada"/>
+        <typeAlias alias="aliasPrograma"   type="co.admisiones.bean.Programa"/>
+        <typeAlias alias="aliasTipoPrograma"   type="co.admisiones.bean.TipoPrograma"/>
+        <typeAlias alias="aliasTipoSolicitud"   type="co.admisiones.bean.TipoSolicitud"/>
+        <typeAlias alias="aliasCiudad"   type="co.admisiones.bean.Ciudad"/>
+        <typeAlias alias="aliasEstadoCivil"   type="co.admisiones.bean.EstadoCivil"/>
+        <typeAlias alias="aliasColegio"   type="co.admisiones.bean.Colegio"/>
+        <typeAlias alias="aliasFormulario"   type="co.admisiones.bean.Formulario"/>
+        <typeAlias alias="aliasFuenteInformacion"   type="co.admisiones.bean.FuenteInformacion"/>
+        <typeAlias alias="aliasGrupoEtnico"   type="co.admisiones.bean.GrupoEtnico"/>
+        <typeAlias alias="aliasLocalidad"   type="co.admisiones.bean.Localidad"/>
+        <typeAlias alias="aliasEstrato"   type="co.admisiones.bean.Estrato"/>
+        <typeAlias alias="aliasTipoBachiller"   type="co.admisiones.bean.TipoBachiller"/>
+        <typeAlias alias="aliasParentesco"   type="co.admisiones.bean.Parentesco"/>
+        <typeAlias alias="aliasFuenteFinanciacion"   type="co.admisiones.bean.FuenteFinanciacion"/>
+    </typeAliases>  
+    <environments default="conexiodb">
+        <environment id="conexiodb">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver"				value="${driver}" />
+                <property name="url"             		value="${url}" />
+                <property name="username"        	        value="${username}" />
+                <property name="password"        		value="${password}" />
+                <property name="poolMaximumActiveConnections"	value="${maxActive}" />
+                <property name="poolMaximumIdleConnections"	value="5" />
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="/co/admisiones/mappers/Admisiones.xml"/>
+    </mappers>
+</configuration>

@@ -1,0 +1,38 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <!--
+    <p:panelGrid  rendered="#{formularioMB.panelProceso}"  >
+        
+                <div class="numeral" >
+                    <h4>1</h4>
+                </div>
+        
+     </p:panelGrid>
+    -->
+    <div class="card">
+        <p:steps  rendered="#{formularioMB.panelProceso}" activeIndex="#{formularioMB.pasoActual}" readonly="false"  >
+            <p:menuitem id="pasoUno" action="#{formularioMB.irAPasoUno}" update=":frmFormulario" />
+            <p:menuitem id="pasoDos"  action="#{formularioMB.irAPasoDos}" update=":frmFormulario" />
+            <p:menuitem id="pasoTres" url="#"/>
+            <p:menuitem id="pasoCuatro" url="#"/>
+            <p:menuitem id="pasoCinco" url="#"/>
+            <p:menuitem id="pasoSeis"  url="#"/>
+            <p:menuitem id="pasoSiete" url="#"/>
+            <p:menuitem id="pasoOcho"  url="#"/>
+        </p:steps>
+    </div>
+    <p:tooltip style="font-size: 12px" for="pasoUno" position="top" >#{msg['label.proceso.pasouno']}</p:tooltip>
+    <p:tooltip style="font-size: 12px" for="pasoDos" position="top" >#{msg['label.proceso.pasodos']}</p:tooltip>
+    <p:tooltip style="font-size: 12px" for="pasoTres" position="top" >#{msg['label.proceso.pasotres']}</p:tooltip>
+    <p:tooltip style="font-size: 12px" for="pasoCuatro" position="top" >#{msg['label.proceso.pasocuatro']}</p:tooltip>
+    <p:tooltip style="font-size: 12px" for="pasoCinco" position="top" >#{msg['label.proceso.pasocinco']}</p:tooltip>
+    <p:tooltip style="font-size: 12px" for="pasoSeis" position="top" >#{msg['label.proceso.pasoseis']}</p:tooltip>
+    <p:tooltip style="font-size: 12px" for="pasoSiete" position="top" >#{msg['label.proceso.pasosiete']}</p:tooltip>
+    <p:tooltip style="font-size: 12px" for="pasoOcho" position="top" >#{msg['label.proceso.pasoocho']}</p:tooltip>
+
+</ui:composition>

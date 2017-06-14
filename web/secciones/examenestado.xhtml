@@ -1,0 +1,40 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid rendered="#{formularioMB.panelExamenEstado}">
+        <div class="notas">
+            <p><em><strong>1.5 Resultados Examen de Estado Saber 11 (ICFES).</strong><br /></em></p>
+            <p><em>Se tomarán en cuenta los puntajes por prueba: el aspeirante debera haber optenido al menos 50 puntos en cada asignatura. </em></p>
+            <p><strong><em>Nota. </em></strong><em>Quien</em><em> haya obtenido un puntaje por debajo de 50 en alguan de las aignaturas, podrá; presentarse, adjuntando el informe de calificaciones de grado 11, como un insumo de analisis adicional a tomar en cuenta en su proceso de admisión.</em></p>
+        </div>
+    </p:panelGrid>
+
+
+    <p:panelGrid rendered="#{formularioMB.panelExamenEstado }" columns="3" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank form-group" style="width: 100%" >
+
+        <p:outputLabel for="itxCodigoSNP" value="#{msg['label.codigosnp']}"/>
+        <p:inputText id="itxCodigoSNP" value="#{formularioMB.formulario.aspirante.examenEstado.snp}" required="true" disabled="#{formularioMB.editarDatosExamen}" />
+        <p:tooltip style="font-size: 12px" for="itxCodigoSNP">#{msg['tooltip.codigosnp']}</p:tooltip>
+
+        <p:outputLabel for="somTipoIdentificacionSNP" value="#{msg['label.tipoidentificacionsnp']}"/>
+        <p:selectOneMenu   id="somTipoIdentificacionSNP" value="#{formularioMB.formulario.aspirante.examenEstado.tipoIdentificacionPresntacion.codigoTipoIdentificacion}" disabled="#{formularioMB.editarDatosExamen}">
+            <f:selectItem itemLabel="Seleccione" itemValue="" />
+            <f:selectItems value="#{formularioMB.tiposIdentificaciones}" var="t" itemValue="#{t.codigoTipoIdentificacion}" itemLabel="#{t.nombreTipoIdentificacion}" />                        
+        </p:selectOneMenu>
+        <p:tooltip style="font-size: 12px" for="somTipoIdentificacionSNP">#{msg['tooltip.tipoidentificacionsnp']}</p:tooltip>
+
+        <p:outputLabel for="itxIdentificacionSNP" value="#{msg['label.identificacion']}"/>
+        <p:inputText id="itxIdentificacionSNP" value="#{formularioMB.formulario.aspirante.examenEstado.numeroIdentificacion}" disabled="#{formularioMB.editarDatosExamen}"/>
+        <p:tooltip style="font-size: 12px" for="itxIdentificacionSNP">#{msg['label.identificacionsnp']}</p:tooltip>
+
+        <p:outputLabel for="cldFechaPresentacionExamen" value="#{msg['label.fechapresentacionsnp']}"  />
+        <p:calendar id="cldFechaPresentacionExamen"  showOn="button" pattern="dd/MM/yyyy" value="#{formularioMB.formulario.aspirante.examenEstado.fechaPresentacion}" disabled="#{formularioMB.editarDatosExamen}" />
+        <p:tooltip style="font-size: 12px" for="cldFechaPresentacionExamen">#{msg['tooltip.identificacionsnp']}</p:tooltip>
+
+    </p:panelGrid>
+
+</ui:composition>

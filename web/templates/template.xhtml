@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+            <meta name="theme-color"  content="#57c279"/>
+        </f:facet>
+        <title><ui:insert name="title">#{msg['label.titulo']}</ui:insert></title>
+        <h:outputScript name="js/nanoscroller.js" library="poseidon-layout" />
+        <h:outputScript name="js/layout.js" library="poseidon-layout" />
+        <h:outputScript name="js/swipe.js" library="poseidon-layout" />
+
+        <h:outputStylesheet name="admisiones.css" library="css" />
+
+
+        <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.ico']}"/>
+
+        <ui:insert name="head"/>
+
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+    </h:head>
+
+    <style type="text/css">
+        
+        
+        .ui-steps .ui-steps-item {
+            width: 12%;
+        }
+
+        .ui-state-highlight {
+            text-shadow: none !important;
+        }
+
+        .ui-steps.custom {
+            margin-bottom: 30px;
+        }
+
+        .ui-steps.custom .ui-steps-item .ui-menuitem-link {
+            height: 10px;
+            padding: 0 1em;
+        }
+
+        .ui-steps.custom .ui-steps-item .ui-steps-number {
+            background-color: #0081c2;
+            color: #FFFFFF;
+            display: inline-block;
+            width: 30px;
+            border-radius: 10px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+
+        .ui-steps.custom .ui-steps-item.ui-state-highlight .ui-steps-title {
+            color: #555;
+        }
+    </style>
+
+
+    <h:body styleClass="main-body">
+
+        <!-- WRAPPER -->
+        <div id="wrapper">
+            <!-- HEADER -->
+            <div id="header">
+                <!-- Logos -->
+                <ui:include src="./../secciones/header.xhtml" />
+                <!-- ENDS Logos -->
+            </div>
+            <!-- ENDS HEADER -->
+
+            <!-- MAIN -->
+            <div id="main">
+                <!-- content -->    
+                <div class="layout-main-content" style="margin-left: auto;margin-right: auto;max-width: 75rem">
+                    <ui:insert name="content">Content</ui:insert>
+                </div>
+                <!-- ENDS content -->
+
+                <!-- time out -->
+                <ui:include src="./../secciones/timeout.xhtml" />
+                <!-- ENDS time out -->
+            </div>
+            <!-- ENDS MAIN -->
+
+            <!-- FOOTER -->
+            <div id="footer">
+                <ui:include src="./../secciones/footer.xhtml" />
+            </div>
+            <!-- ENDS FOOTER -->
+        </div>
+        <!-- ENDS WRAPPER -->
+
+    </h:body>
+
+</html>

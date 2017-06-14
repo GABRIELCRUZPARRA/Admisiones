@@ -1,0 +1,27 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <div>
+        <p:panelGrid rendered="#{formularioMB.panelInicio}" columns="3" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank form-group" style="width: 100%" >
+            <p:outputLabel for="somTipoIdentificacion" value="#{msg['label.tipoidentificacion']}"/>
+            <p:selectOneMenu   id="somTipoIdentificacion" value="#{formularioMB.formulario.aspirante.tipoIdentificacion.codigoTipoIdentificacion}" required="true">
+                <f:selectItem itemLabel="Seleccione" itemValue="" />
+                <f:selectItems value="#{formularioMB.tiposIdentificaciones}" var="t" itemValue="#{t.codigoTipoIdentificacion}" itemLabel="#{t.nombreTipoIdentificacion}" />                        
+            </p:selectOneMenu>
+            <p:tooltip style="font-size: 12px" for="somTipoIdentificacion">#{msg['label.tipoidentificacion.tooltip']}</p:tooltip>
+
+            <p:outputLabel for="itxIdentificacion" value="#{msg['label.identificacion']}"/>
+            <p:inputText id="itxIdentificacion" value="#{formularioMB.formulario.aspirante.identificacion}" required="true" />
+            <p:tooltip style="font-size: 12px" for="itxIdentificacion">#{msg['label.identificacion.tooltip']}</p:tooltip>
+
+            <p:outputLabel for="cldFechaNacimiento" value="#{msg['label.fechanacimiento']}" />
+            <p:calendar id="cldFechaNacimiento" showOn="button" pattern="dd/MM/yyyy" value="#{formularioMB.formulario.aspirante.fechaNacimiento}" required="true" />
+            <p:tooltip style="font-size: 12px" for="cldFechaNacimiento">#{msg['label.fechanacimiento.tooltip']}</p:tooltip>
+            
+        </p:panelGrid>
+    </div>
+</ui:composition>

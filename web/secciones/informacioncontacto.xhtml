@@ -1,0 +1,70 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <p:panelGrid rendered="#{formularioMB.panelInformacionContacto}">
+        <div class="notas">
+            <p><em><strong>1.3 Información de Contacto. </strong>Esta sección le permite registrar la información sobre sus datos de contacto, tales como: Dirección, Teléfono, Celular y Correso Electrónico</em> </p>
+        </div>
+   </p:panelGrid>
+    
+    <p:panelGrid rendered="#{formularioMB.panelInformacionContacto}" columns="3" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank form-group" style="width: 100%" >
+
+        <p:outputLabel for="itxDireccion" value="#{msg['label.direccion']}"/>
+        <p:inputText id="itxDireccion" value="#{formularioMB.formulario.aspirante.informacionContacto.direccion}" required="true" disabled="#{formularioMB.editarDatosContacto}" onkeyup="this.value = this.value.toUpperCase();" />
+        <p:tooltip style="font-size: 12px" for="itxDireccion">#{msg['tooltip.direccion']}</p:tooltip>
+
+        <p:outputLabel for="atcCiudadDireccion" value="#{msg['label.ciudaddireccion']}" />
+        <p:autoComplete id="atcCiudadDireccion"
+                        queryDelay="1000" value="#{formularioMB.formulario.aspirante.informacionContacto.ciudad}"
+                        completeMethod="#{formularioMB.onCompletarCiudad}" var="d"
+                        itemLabel="#{d.nombreCiudad}" itemValue="#{d}"
+                        converter="ciudadConverter" required="true"
+                        disabled="#{formularioMB.editarDatosContacto}">
+            <p:ajax event="itemSelect" listener="#{formularioMB.cargaListaLocalidad}" update=":frmFormulario:somLocalida"/>
+        </p:autoComplete>
+        <p:tooltip style="font-size: 12px" for="atcCiudadDireccion">#{msg['tooltip.ciudaddireccion']}</p:tooltip>
+
+        <p:outputLabel for="somLocalida" value="#{msg['label.localidad']}"/>
+        <p:selectOneMenu id="somLocalida" value="#{formularioMB.formulario.aspirante.informacionContacto.localidad.codigoLocalidad}" required="#{formularioMB.localidadRequerida}" disabled="#{formularioMB.editarDatosContacto}">
+            <f:selectItem itemLabel="Seleccione" itemValue="" />
+            <f:selectItems value="#{formularioMB.localidades}" var="lc" itemValue="#{lc.codigoLocalidad}" itemLabel="#{lc.nombreLocalidad}" /> 
+        </p:selectOneMenu>
+        <p:tooltip  style="font-size: 12px" for="somLocalida">#{msg['tooltip.localidad']}</p:tooltip>
+
+        <p:outputLabel for="itxBarrio" value="#{msg['label.barrio']}"/>
+        <p:inputText id="itxBarrio" value="#{formularioMB.formulario.aspirante.informacionContacto.barrio}" required="true" disabled="#{formularioMB.editarDatosContacto}" onkeyup="this.value = this.value.toUpperCase();"/>
+        <p:tooltip style="font-size: 12px" for="itxDireccion">#{msg['tooltip.barrio']}</p:tooltip>
+
+        <p:outputLabel for="somEstrato" value="#{msg['label.estrato']}"/>
+        <p:selectOneMenu id="somEstrato" value="#{formularioMB.formulario.aspirante.informacionContacto.estrato.codigoEstrato}" required="true" disabled="#{formularioMB.editarDatosContacto}">
+            <f:selectItem itemLabel="Seleccione" itemValue="" />
+            <f:selectItems value="#{formularioMB.estratos}" var="es" itemValue="#{es.codigoEstrato}" itemLabel="#{es.nombreEstrato}" /> 
+        </p:selectOneMenu>
+        <p:tooltip  style="font-size: 12px" for="somEstrato">#{msg['tooltip.estrato']}</p:tooltip>
+
+        <p:outputLabel for="imxTelefono" value="#{msg['label.telefono']}"/>
+        <p:inputText id="imxTelefono" value="#{formularioMB.formulario.aspirante.informacionContacto.telefono}" maxlength="25" disabled="#{formularioMB.editarDatosContacto}" required="true" />
+        <p:tooltip style="font-size: 12px" for="imxTelefono">#{msg['tooltip.telefono']}</p:tooltip>
+
+        <p:outputLabel for="imxCelular" value="#{msg['label.celular']}"/>
+        <p:inputText id="imxCelular" value="#{formularioMB.formulario.aspirante.informacionContacto.celular}" maxlength="13" disabled="#{formularioMB.editarDatosContacto}" required="true"/>
+        <p:tooltip style="font-size: 12px" for="imxCelular">#{msg['tooltip.celular']}</p:tooltip>
+
+        <p:outputLabel for="itxEmail" value="#{msg['label.email']}"/>
+        <p:inputText id="itxEmail" value="#{formularioMB.formulario.aspirante.informacionContacto.email}" required="true" validatorMessage="#{msg['message.validate.email']}" disabled="#{formularioMB.editarDatosContacto}" >
+            <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+        </p:inputText>
+        <p:tooltip style="font-size: 12px" for="itxEmail">#{msg['tooltip.email']}</p:tooltip>
+
+        <p:outputLabel for="itxConfirmarEmail" value="#{msg['label.confirmaremail']}"/>
+        <p:inputText id="itxConfirmarEmail" value="#{formularioMB.formulario.aspirante.informacionContacto.confirmarEmail}" required="true" validatorMessage="#{msg['message.validate.confirmaremail']}" disabled="#{formularioMB.editarDatosContacto}" >
+            <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+        </p:inputText>
+        <p:tooltip style="font-size: 12px" for="itxConfirmarEmail">#{msg['tooltip.email']}</p:tooltip>
+    </p:panelGrid>
+
+</ui:composition>

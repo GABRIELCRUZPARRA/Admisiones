@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+        <title>Formulario de Admisión</title>
+        <meta name="description" content=""/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!--Favicon-->
+        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png"/>
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png"/>
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png"/>
+        <link rel="manifest" href="favicon/manifest.json"/>
+        <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5"/>
+        <meta name="theme-color" content="#ffffff"/>
+        <!--CSS Stylesheets-->
+        <h:outputStylesheet name="normalize.min.css" library="css" />
+        <h:outputStylesheet name="styles.css" library="css" />
+        <h:outputStylesheet name="jquery.fullPage.css" library="css" />
+        
+        <h:outputScript name="js/nanoscroller.js" library="poseidon-layout" />
+        <h:outputScript name="js/layout.js" library="poseidon-layout" />
+        <h:outputScript name="js/swipe.js" library="poseidon-layout" />
+        
+        <h:outputStylesheet name="admisiones.css" library="css" />
+
+
+        <!--Modernizr-->
+        <h:outputScript name="vendor/modernizr-2.8.3-respond-1.4.2.min.js" library="js" />
+
+        <!--Google Analytics-->
+        <script>
+            (function (b, o, i, l, e, r) {
+                b.GoogleAnalyticsObject = l;
+                b[l] || (b[l] =
+                        function () {
+                            (b[l].q = b[l].q || []).push(arguments)
+                        });
+                b[l].l = +new Date;
+                e = o.createElement(i);
+                r = o.getElementsByTagName(i)[0];
+                e.src = '//www.google-analytics.com/analytics.js';
+                r.parentNode.insertBefore(e, r)
+            }(window, document, 'script', 'ga'));
+            ga('create', 'UA-XXXXX-X', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </h:head>
+
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="fullpage">
+
+            <div class="section s01s">
+                <header id="zoneheader">
+                    <h1>Formulario de Admisión</h1>
+                </header><!--/zoneheader-->
+            </div><!--/section s01s-->
+
+
+
+            <div class="section s02s">
+
+                <nav id="zonenav">
+                    <ul id="menu">
+                        <li><a href="#" class="navitem active">1</a></li>
+                        <li><a href="#slide2" class="navitem">2</a></li>
+                        <li><a href="#" class="navitem">3</a></li>
+                        <li><a href="#" class="navitem">4</a></li>
+                        <li><a href="#" class="navitem">5</a></li>
+                        <li><a href="#" class="navitem">6</a></li>
+                    </ul>
+                </nav><!--/zonenav-->
+
+                <div class="slide" data-anchor="slide1">
+                    <h:form id="frmFormulario">
+
+                        <p:panelGrid rendered="#{formularioMB.panelInicio}" columns="3" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank form-group" style="width: 100%" >
+                            <p:outputLabel for="somTipoIdentificacion" value="#{msg['label.tipoidentificacion']}"/>
+                            <p:selectOneMenu   id="somTipoIdentificacion" value="#{formularioMB.formulario.aspirante.tipoIdentificacion.codigoTipoIdentificacion}" required="true">
+                                <f:selectItem itemLabel="Seleccione" itemValue="" />
+                                <f:selectItems value="#{formularioMB.tiposIdentificaciones}" var="t" itemValue="#{t.codigoTipoIdentificacion}" itemLabel="#{t.nombreTipoIdentificacion}" />                        
+                            </p:selectOneMenu>
+                            <p:tooltip style="font-size: 12px" for="somTipoIdentificacion">#{msg['label.tipoidentificacion.tooltip']}</p:tooltip>
+
+                            <p:outputLabel for="itxIdentificacion" value="#{msg['label.identificacion']}"/>
+                            <p:inputText id="itxIdentificacion" value="#{formularioMB.formulario.aspirante.identificacion}" required="true" />
+                            <p:tooltip style="font-size: 12px" for="itxIdentificacion">#{msg['label.identificacion.tooltip']}</p:tooltip>
+
+                            <p:outputLabel for="cldFechaNacimiento" value="#{msg['label.fechanacimiento']}" />
+                            <p:calendar id="cldFechaNacimiento" showOn="button" pattern="dd/MM/yyyy" value="#{formularioMB.formulario.aspirante.fechaNacimiento}" required="true" />
+                            <p:tooltip style="font-size: 12px" for="cldFechaNacimiento">#{msg['label.fechanacimiento.tooltip']}</p:tooltip>
+
+                        </p:panelGrid>
+
+                    </h:form>
+                </div><!--/slide-->
+
+
+                <div class="slide" data-anchor="slide2"> 
+                    <label for="otro">Otro input</label>
+                    <input type="date" name="fecha" id="otro"/> 
+                </div><!--/slide 2-->
+
+                <div class="slide" data-anchor="slide3">
+                    <label for="otro">Otro input</label>
+                    <input type="date" name="fecha" id="otro"/> 
+                </div><!--/slide 3-->
+
+                <div class="slide" data-anchor="slide4">
+                    <label for="otro">Otro input</label>
+                    <input type="date" name="fecha" id="otro"/> 
+                </div><!--/slide 4-->
+
+                <div class="slide" data-anchor="slide5">
+                    <label for="otro">Otro input</label>
+                    <input type="date" name="fecha" id="otro"/> 
+                </div><!--/slide 5-->
+
+                <div class="slide" data-anchor="slide6">
+                    <label for="otro">Otro input</label>
+                    <input type="date" name="fecha" id="otro"/> 
+                </div><!--/slide 6-->
+
+            </div><!--/section s02s-->
+
+
+            <div class="section s03s">
+                <footer id="zonefooter">
+                    <div class="footer-container">
+                    </div><!--/footer-container-->
+                </footer><!--/zonefooter-->
+            </div><!--/section-->
+
+        </div><!--/fullpage-->
+
+        <!--Scripts before /body-->
+
+
+        <!--JQuery-->
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+        <script type="text/javascript" id="jQuery">
+            if (!window.jQuery) {
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = '/resources/js/vendor/jquery-1.11.2.min.js';
+                var jQueryScript = document.getElementById('jQuery');
+                jQueryScript.parentNode.insertBefore(script, jQueryScript);
+            }
+        </script>
+
+        <!--Fullpage-->
+        <h:outputScript name="jquery.fullPage.min.js" library="js"/>
+
+        <script>
+            $(document).ready(function () {
+                $('#fullpage').fullpage();
+            });
+        </script>
+        <!--custom JS-->
+
+        <h:outputScript name="plugins.js" library="js"/>
+        <h:outputScript name="main.js" library="js"/>
+
+
+    </body>
+
+</html>

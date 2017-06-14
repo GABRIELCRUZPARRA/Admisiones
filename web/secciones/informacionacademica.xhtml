@@ -1,0 +1,79 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <p:panelGrid rendered="#{formularioMB.panelInformacionAcademica}">
+        <div class="notas">
+            <p><em><strong>1.4 Información Académica. </strong>Esta sección le permite registrar la información asociada a a su colegion y tipos de estudios logrados.</em> </p>
+        </div>
+   </p:panelGrid>
+
+    <p:panelGrid rendered="#{formularioMB.panelInformacionAcademica}" columns="3" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank form-group" style="width:100%" >
+
+        
+        <p:outputLabel for="somGraduadoEnColombia" value="#{msg['label.graduadoencolombia']}"/>
+        <p:selectOneMenu id="somGraduadoEnColombia" value="#{formularioMB.formulario.aspirante.informacionAcademica.graduadoColombia}" required="true" disabled="#{formularioMB.editarDatosAcademicos}">
+            <f:selectItem itemLabel="Si" itemValue="S" />
+            <f:selectItem itemLabel="No" itemValue="N" />
+             <p:ajax listener="#{formularioMB.onFijarInformacionAcademicaRequerida}" update=":frmFormulario:itxAnyoGrado,:frmFormulario:atcColegio"/>
+        </p:selectOneMenu>
+        <p:tooltip  style="font-size: 12px" for="somGraduadoEnColombia">#{msg['tooltip.graduadoencolombia']}</p:tooltip>
+        
+        
+        <p:outputLabel for="itxAnyoGrado" value="#{msg['label.anyograduacion']}"/>
+        <p:inputNumber id="itxAnyoGrado" value="#{formularioMB.formulario.aspirante.informacionAcademica.anyoGraduacion}" minValue="0" maxValue="9999" disabled="#{formularioMB.editarDatosAcademicos}" required="#{formularioMB.datosAcademicosRequeridos}">
+            <f:validateLongRange minimum="1980" maximum="#{formularioMB.anyoSistema}"></f:validateLongRange>
+        </p:inputNumber>
+        <p:tooltip style="font-size: 12px" for="itxAnyoGrado">#{msg['tooltip.calendario']}</p:tooltip>
+
+        
+        <p:outputLabel for="atcColegio" value="#{msg['label.colegio']}" />
+        <p:autoComplete id="atcColegio"
+                        queryDelay="1000" value="#{formularioMB.formulario.aspirante.informacionAcademica.colegio}"
+                        completeMethod="#{formularioMB.onCompletarColegios}" var="col"
+                        itemLabel="#{col.nombreColegio}" itemValue="#{col}"
+                        converter="colegioConverter"
+                        disabled="#{formularioMB.editarDatosAcademicos}"
+                        required="#{formularioMB.datosAcademicosRequeridos}"
+                        >
+        </p:autoComplete>
+        <p:tooltip style="font-size: 12px" for="atcColegio">#{msg['tooltip.colegio']}</p:tooltip>
+        
+        <p:outputLabel for="atcCiudadColegio" value="#{msg['label.ciudadcolegio']}" />
+        <p:autoComplete id="atcCiudadColegio"
+                        queryDelay="1000" value="#{formularioMB.formulario.aspirante.informacionAcademica.ciudadColegio}"
+                        completeMethod="#{formularioMB.onCompletarCiudad}" var="d"
+                        itemLabel="#{d.nombreCiudad}" itemValue="#{d}"
+                        converter="ciudadConverter"
+                        disabled="#{formularioMB.editarDatosAcademicos}"
+                        required="#{formularioMB.datosAcademicosRequeridos}">
+        </p:autoComplete>
+        <p:tooltip style="font-size: 12px" for="atcCiudadColegio">#{msg['tooltip.ciudadcolegio']}</p:tooltip>        
+        
+        <p:outputLabel for="somTipoBachiller" value="#{msg['label.tipobachiller']}"/>
+        <p:selectOneMenu id="somTipoBachiller" value="#{formularioMB.formulario.aspirante.informacionAcademica.tipoBachiller.codigoTipoBachiller}" disabled="#{formularioMB.editarDatosAcademicos}" required="#{formularioMB.datosAcademicosRequeridos}">
+            <f:selectItem itemLabel="Seleccione" itemValue="" />
+            <f:selectItems value="#{formularioMB.tiposBachiller}" var="tb" itemValue="#{tb.codigoTipoBachiller}" itemLabel="#{tb.nombreTipoBachille}" /> 
+        </p:selectOneMenu>
+        <p:tooltip  style="font-size: 12px" for="somTipoBachiller">#{msg['tooltip.tipobachiller']}</p:tooltip>
+        
+        <p:outputLabel for="somTipoColegio" value="#{msg['label.tipocolegio']}"/>
+        <p:selectOneMenu id="somTipoColegio" value="#{formularioMB.formulario.aspirante.informacionAcademica.tipoColegio.codigoTipoColegio}" disabled="#{formularioMB.editarDatosAcademicos}" required="#{formularioMB.datosAcademicosRequeridos}">
+            <f:selectItem itemLabel="Seleccione" itemValue="" />
+            <f:selectItems value="#{formularioMB.tiposColegio}" var="tc" itemValue="#{tc.codigoTipoColegio}" itemLabel="#{tc.nombreTipoColegio}" /> 
+        </p:selectOneMenu>
+        <p:tooltip  style="font-size: 12px" for="somTipoColegio">#{msg['tooltip.tipocolegio']}</p:tooltip>
+        
+        <p:outputLabel for="somCalendario" value="#{msg['label.calendario']}"/>
+        <p:selectOneMenu id="somCalendario" value="#{formularioMB.formulario.aspirante.informacionAcademica.calendario.codigoCalendario}" disabled="#{formularioMB.editarDatosAcademicos}" required="#{formularioMB.datosAcademicosRequeridos}">
+            <f:selectItem itemLabel="Seleccione" itemValue="" />
+            <f:selectItems value="#{formularioMB.calendarios}" var="ca" itemValue="#{ca.codigoCalendario}" itemLabel="#{ca.nombreCalendario}" /> 
+        </p:selectOneMenu>
+        <p:tooltip  style="font-size: 12px" for="somCalendario">#{msg['tooltip.calendario']}</p:tooltip>
+        
+    </p:panelGrid>
+
+</ui:composition>

@@ -1,0 +1,42 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    <div>
+        <p:commandButton rendered="#{formularioMB.panelInicio}" action="#{formularioMB.onContinuar}" id="btContinuarInicio" value="#{msg['button.continuar.value']}" icon="fa fa-chevron-circle-right" styleClass="blue-btn" update=":frmFormulario"/>
+        <p:commandButton rendered="#{formularioMB.panelPrograma}" action="#{formularioMB.onSiguientePrograma}" id="btSiguientePrograma" value="#{msg['button.siguiente.value']}"  icon="fa fa-chevron-circle-right"  styleClass="blue-btn" update=":frmFormulario"/>
+        
+        <!--Botones Seccion Datos Personales-->
+        <p:commandButton rendered="#{formularioMB.panelInfromacionPersonal}" action="#{formularioMB.onAnteriorDatosPersonales}" id="btAnteriorInformacionPersonal" value="#{msg['label.boton.anterior']}"  icon="fa fa-chevron-circle-left" styleClass="blue-btn" update=":frmFormulario"/>
+        <p:commandButton rendered="#{formularioMB.panelInfromacionPersonal}" action="#{formularioMB.onSiguienteInformacionPersonal}" id="btSiguienteInformacionPersonal" value="#{msg['label.boton.sigueinte']}"  icon="fa fa-chevron-circle-right" styleClass="blue-btn" update=":frmFormulario"/>
+        
+
+        <!--Botones Seccion Infromacion Contacto-->
+        <p:commandButton rendered="#{formularioMB.panelInformacionContacto}" action="#{formularioMB.onAnteriorInformacionContacto}" id="btAnteriorInformacionContacto" value="#{msg['label.boton.anterior']}"  icon="fa fa-chevron-circle-left" styleClass="blue-btn" update=":frmFormulario"/>
+        <p:commandButton rendered="#{formularioMB.mostrarBotonSiguienteInformacionContacto}" action="#{formularioMB.onSiguienteInformacionContacto}" id="btSiguienteInformacionContacto" value="#{msg['label.boton.sigueinte']}" icon="fa fa-chevron-circle-right"  styleClass="blue-btn" update=":frmFormulario"/>
+        <p:commandButton rendered="#{formularioMB.mostrarBotonGuardarInformacionContacto}" action="#{formularioMB.onGuardarEstudiante}" id="btGuardarInformacionPersonal" value="#{msg['label.boton.guradarcontinuar']}"  icon="fa fa-floppy-o" styleClass="blue-btn" update=":frmFormulario"/>
+
+        <!--Botones Seccion Infromacion Aacademica-->
+        <p:commandButton rendered="#{formularioMB.panelInformacionAcademica}" action="#{formularioMB.onAnteriorInformacionAcademica}" id="btAnteriorInformacionAcademica" value="#{msg['label.boton.anterior']}"  icon="fa fa-chevron-circle-left" styleClass="blue-btn" update=":frmFormulario"/>
+        <p:commandButton rendered="#{formularioMB.mostrarBotonSiguienteInformacionAcademica}" action="#{formularioMB.onSiguienteInformacionAcademica}" id="btSiguienteInformacionAcademica" value="#{msg['label.boton.sigueinte']}" icon="fa fa-chevron-circle-right" styleClass="blue-btn" update=":frmFormulario"/>
+        <p:commandButton rendered="#{formularioMB.mostrarBotonGuardarInformacionAcademica}" action="#{formularioMB.onGuardarInformacionAcademica}" id="btGuardarInformacionAcademica" value="#{msg['label.boton.guradarcontinuar']}" icon="fa fa fa-floppy-o" styleClass="blue-btn" update=":frmFormulario"/>
+
+        <!--Botones Seccion Examen Estado-->
+        <p:commandButton rendered="#{formularioMB.panelExamenEstado}" action="#{formularioMB.onAnteriorExamenEstado}" id="btAnteriorInformacionExamenEstado" value="#{msg['label.boton.anterior']}" icon="fa fa-chevron-circle-left" styleClass="blue-btn" update=":frmFormulario"/>
+        <p:commandButton rendered="#{formularioMB.mostrarBotonSiguienteInformacionExamen}" action="#{formularioMB.onSiguienteExamenEstado}" id="btSiguienteInformacionExamenEstado" value="#{msg['label.boton.sigueinte']}" icon="fa fa-chevron-circle-right" styleClass="blue-btn" update=":frmFormulario"/>
+        <p:commandButton rendered="#{formularioMB.mostrarBotonGuardarInformacionExamen}" action="#{formularioMB.onGuardarInfromacionExamen}" id="btGuardarInformacionExamen" value="#{msg['label.boton.guradarcontinuar']}" icon="fa fa-floppy-o" styleClass="blue-btn" update=":frmFormulario"/>
+
+        <!--Botones Seccion Informacion Acudiente-->
+        <p:commandButton rendered="#{formularioMB.panelInformacionAcudiente}" action="#{formularioMB.onAnteriorInformacionAcudiente}"  id="btAnteriorInformacionAcudiente" value="#{msg['label.boton.anterior']}"  icon="fa fa-chevron-circle-left" styleClass="blue-btn" update=":frmFormulario"/>
+        <p:commandButton rendered="#{formularioMB.mostrarBotonSiguienteInformacionAcudiente}" action="#{formularioMB.onSiguienteInformacionAcudiente}" id="btSiguienteInformacionAcudiente" value="#{msg['label.boton.sigueinte']}" icon="fa fa-chevron-circle-right" styleClass="blue-btn" update=":frmFormulario"/>
+        <p:commandButton rendered="#{formularioMB.mostrarBotonGuardarInformacionAcudiente}" action="#{formularioMB.onGuardarInformacionAcudiente}"   id="btGuardarInformacionAcudiente" value="#{msg['label.boton.guradarcontinuar']}" icon="fa fa-floppy-o" styleClass="blue-btn" update=":frmFormulario"/>
+
+        <!--Botones Seccion Informacion Adicional-->
+        <p:commandButton rendered="#{formularioMB.panelInformacionAdicional}" action="#{formularioMB.onAnteriorInformacionAdicional}" id="btAnteriorInformacionAdicional" value="#{msg['label.boton.anterior']}"  icon="fa fa-chevron-circle-left" styleClass="blue-btn" update=":frmFormulario"/>
+        <p:commandButton rendered="#{formularioMB.mostrarBotonSiguienteInformacionAdicional}" action="#{formularioMB.onSiguienteInformacionAdicional}" id="btSiguienteInformacionAdicional" value="#{msg['label.boton.finalizar']}" icon="fa fa-print" styleClass="blue-btn" update=":frmFormulario"/>
+        <p:commandButton rendered="#{formularioMB.mostrarBotonGuardarInformacionAdicional}" action="#{formularioMB.onGuardarInformacionAdicional}"   id="btGuardarInformacionAdicional" value="#{msg['label.boton.guradarcontinuar']}" icon="fa fa-floppy-o" styleClass="blue-btn" update=":frmFormulario"/>
+    </div>
+
+</ui:composition>

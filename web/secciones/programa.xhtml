@@ -1,0 +1,50 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <p:panelGrid rendered="#{formularioMB.panelPrograma}">
+        <div class="notas">
+            <p><em><strong>1.1 Información de Programas. </strong>Esta sección le permite registrar el Programa, la Jornada y el Tipo de Inscripción que esta realizando.</em> </p>
+        </div>
+   </p:panelGrid>
+     <!--Panel de datos -->
+    <p:panelGrid rendered="#{formularioMB.panelPrograma}" columns="3" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank form-group" style="width: 100%" >
+        <p:outputLabel for="itxPeriodo" value="#{msg['label.periodo']}"/>
+        <p:inputText id="itxPeriodo" value="#{formularioMB.formulario.periodo}" required="true" readonly="true" />
+        <p:tooltip style="font-size: 12px" for="itxPeriodo">#{msg['label.periodo.tooltip']}</p:tooltip>
+
+        <p:outputLabel for="somTipoPrograma" value="#{msg['label.tipoprograma']}"/>
+        <p:selectOneMenu id="somTipoPrograma" value="#{formularioMB.formulario.programa.tipoPrograma.codigoTipoPrograma}" required="true"  disabled="#{formularioMB.editarDatosPrograma}">
+            <f:selectItem itemLabel="Seleccione" itemValue="" />
+            <f:selectItems value="#{formularioMB.tiposPrograma}" var="tp" itemValue="#{tp.codigoTipoPrograma}" itemLabel="#{tp.nombreTipoPrograma}" /> 
+            <p:ajax listener="#{formularioMB.cargaListaProgramas}" update=":frmFormulario:somPrograma"/>
+        </p:selectOneMenu>
+        <p:tooltip style="font-size: 12px" for="somTipoPrograma">#{msg['label.tipoprograma.tooltip']}</p:tooltip>
+
+        <p:outputLabel for="somPrograma" value="#{msg['label.programa']}"/>
+        <p:selectOneMenu id="somPrograma" value="#{formularioMB.formulario.programa.idPrograma}" required="true" disabled="#{formularioMB.editarDatosPrograma}">
+            <f:selectItem itemLabel="Seleccione" itemValue="" />
+            <f:selectItems value="#{formularioMB.programas}" var="ps" itemValue="#{ps.idPrograma}" itemLabel="#{ps.nombrePrograma}" /> 
+        </p:selectOneMenu>
+        <p:tooltip  style="font-size: 12px" for="somPrograma">#{msg['label.programa.tooltip']}</p:tooltip>
+
+        <p:outputLabel for="somJornada" value="#{msg['label.jornada']}"/>
+        <p:selectOneMenu id="somJornada" value="#{formularioMB.formulario.jornada.codigoJornada}" required="true" disabled="#{formularioMB.editarDatosPrograma}">
+            <f:selectItem itemLabel="Seleccione" itemValue="" />
+            <f:selectItems value="#{formularioMB.jornadas}" var="js" itemValue="#{js.codigoJornada}" itemLabel="#{js.nombreJornada}" /> 
+        </p:selectOneMenu>
+        <p:tooltip  style="font-size: 12px" for="somJornada">#{msg['label.jornada.tooltip']}</p:tooltip>
+
+        <p:outputLabel for="somTipoSolicitud" value="#{msg['label.tiposolictud']}"/>
+        <p:selectOneMenu id="somTipoSolicitud" value="#{formularioMB.formulario.tipoSolictud.codigoTipoSolicitud}" required="true" disabled="#{formularioMB.editarDatosPrograma}">
+            <f:selectItem itemLabel="Seleccione" itemValue="" />
+            <f:selectItems value="#{formularioMB.tiposSolicitud}" var="ts" itemValue="#{ts.codigoTipoSolicitud}" itemLabel="#{ts.nombreTipoSolictud}" /> 
+        </p:selectOneMenu>
+        <p:tooltip  style="font-size: 12px" for="somTipoSolicitud">#{msg['label.tiposolictud.tooltip']}</p:tooltip>
+
+    </p:panelGrid>
+
+</ui:composition>

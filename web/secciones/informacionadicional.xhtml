@@ -1,0 +1,36 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <p:panelGrid rendered="#{formularioMB.panelInformacionAdicional}">
+        <div class="notas">
+            <p><em><strong>1.7 Información Adicional. </strong>Esta sección le permite registrar la información correspondiente a las fuetes de financiación de sus estudios y los medios de comunicación por medio de los cuales se entero del programa.</em> </p>
+        </div>
+   </p:panelGrid>
+
+
+    <p:panelGrid rendered="#{formularioMB.panelInformacionAdicional}" columns="3" columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4" layout="grid" styleClass="ui-panelgrid-blank form-group" style="width: 100%" >
+
+       <p:outputLabel for="somFuenteFinanciacion" value="#{msg['label.fuentefinanciacion']}"/>
+       <p:selectOneMenu   id="somFuenteFinanciacion" value="#{formularioMB.formulario.aspirante.informacionAdicional.fuenteFinanciacion.codigoFuenteFinanciacion}" required="true" disabled="#{formularioMB.editarInformacionAdicional}">
+            <f:selectItem itemLabel="Seleccione" itemValue="" />
+            <f:selectItems value="#{formularioMB.fuentesFinanciacion}" var="ffin" itemValue="#{ffin.codigoFuenteFinanciacion}" itemLabel="#{ffin.nombreFuenteFinanciacion}" />                        
+        </p:selectOneMenu>
+        <p:tooltip style="font-size: 12px" for="somFuenteFinanciacion">#{msg['tooltip.fuentefinanciacion']}</p:tooltip>
+        
+        <p:outputLabel for="somFuenteInformacion" value="#{msg['label.fuenteinformacion']}"/>
+        <p:selectOneMenu   id="somFuenteInformacion" value="#{formularioMB.formulario.aspirante.informacionAdicional.fuenteInformacion.codigoFuenteInformacion}" required="true" disabled="#{formularioMB.editarInformacionAdicional}">
+            <f:selectItem itemLabel="Seleccione" itemValue="" />
+            <f:selectItems value="#{formularioMB.fuentesInformacion}" var="finf" itemValue="#{finf.codigoFuenteInformacion}" itemLabel="#{finf.nombreFuenteInformacion}" />                        
+        </p:selectOneMenu>
+        <p:tooltip style="font-size: 12px" for="somFuenteInformacion">#{msg['tooltip.fuenteinformacion']}</p:tooltip>
+       
+        <p:outputLabel for="itxOtraFuenteInformacion" value="#{msg['label.otrafuenteinformacion']}"/>
+        <p:inputText id="itxOtraFuenteInformacion" value="#{formularioMB.formulario.aspirante.informacionAdicional.otraFuente}" disabled="#{formularioMB.editarInformacionAdicional}"/>
+        <p:tooltip style="font-size: 12px" for="itxNombresAcudiente">#{msg['tooltip.fuenteinformacion']}</p:tooltip>
+                
+    </p:panelGrid>
+
+</ui:composition>

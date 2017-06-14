@@ -1,0 +1,21 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+body {
+  height: 100%;
+  width: 100%;
+}
+.section {
+  height: 100%;
+  width: 100%;
+}
+.s01s {
+  background: #FF9900;
+}
+.s02s {
+  background: #333;
+}
+.s03s {
+  background: #FF3333;
+}
